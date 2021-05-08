@@ -5,7 +5,7 @@ const { sequelize } = require('./models/tabelaCampeao')
 
 logger.info('Conectando ao BD...')
 
-//sequelize.sync().then( async () => {
+sequelize.sync().then( async () => {
   
     let isJobRunning = false
     logger.info('Aguardando execução do job...')
@@ -15,9 +15,18 @@ logger.info('Conectando ao BD...')
         }
         logger.info('Iniciando job...')
         isJobRunning = true
-    })
+
+        try {
+            
+        } catch {
+
+        } finally {
+            isJobRunning = false
+            logger.info('O job acabou...')
+        }
+    }, null, true, 'America/Sao_Paulo')
     job.start()
 
-//}).catch(error => {
-//    logger.fatal(`Health NOK: ${error.message}`)
-//})
+}).catch(error => {
+    logger.fatal(`Health NOK: ${error.message}`)
+})

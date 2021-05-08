@@ -22,18 +22,25 @@ npm install cron --save
 const CronJob = require('cron').CronJob
 
 
-
-
-
-
 const { sequelize } = require('./models/tabelaCampeao')
 sequelize.sync().then().catch()
 
 src/models/tabelaCampeao.js
 
 npm install sequelize --save
+npm install pg --save
 
+postgress instalar local(sdds mongo atlas)
 
+create database servico_db;
+\c servico_db;
+\dt;
+\dt *tabela*;
+///////////////////////////////
+delete --tabelaChampeaos;
+\d tabelaChampeao
+tabelaCampeaos
+tabelaChampeaos
 
 
 

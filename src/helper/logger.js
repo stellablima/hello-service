@@ -5,7 +5,7 @@ module.exports = pino ({
     level: process.env.LOG_LEVEL,//'debug',//
     formatters: {
         level: label => {
-            return { level: label}
+            return { level: label }
         }
     },
     messageKey: 'message',
