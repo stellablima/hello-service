@@ -2,7 +2,7 @@ require('dotenv').config()
 const logger = require('./helper/logger')
 const CronJob = require('cron').CronJob
 const { sequelize } = require('./models/tabelaCampeao')
-
+const carga = require('./services/carga')
 logger.info('Conectando ao BD...')
 
 sequelize.sync().then( async () => {
@@ -13,13 +13,14 @@ sequelize.sync().then( async () => {
         if(isJobRunning){
             logger.info('Job em execução...')
         }
-        logger.info('Iniciando job...')
         isJobRunning = true
-
+        
         try {
-            
-        } catch {
-
+            logger.info('Iniciando job...')
+            await carga.start()
+            //logger.info('Job finalizado')
+        } catch(error) {
+            logger.error(`Health NOK: Erro no Job [${error.message}]`)
         } finally {
             isJobRunning = false
             logger.info('O job acabou...')
@@ -28,5 +29,5 @@ sequelize.sync().then( async () => {
     job.start()
 
 }).catch(error => {
-    logger.fatal(`Health NOK: ${error.message}`)
+    logger.fatal(`Health NOK: Erro na conexão com o banco [${error.message}]`)
 })

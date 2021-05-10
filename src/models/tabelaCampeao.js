@@ -28,22 +28,24 @@ const sequelize = new Sequelize (
 const DATABASE_BULK_CHUNCK_SIZE = parseInt(process.env.DATABASE_BULK_CHUNCK_SIZE)
 
 const TabelaCampeao = sequelize.define('TabelaCampeao', {
+    /*campos setado automaticamente pelo serialize, poderia deletar
     ID:{
         primaryKey: true,
         type: DataTypes.BIGINT(5),
+        autoIncrement: true,
         //allowNull: true
-    },
-    NOME_CAMPEAO:{
+    }, */
+    NOME:{
         type: DataTypes.STRING(10),
         allowNull: true
     },
     LINE:{
-        type: DataTypes.STRING(15),
+        type: DataTypes.STRING(32),
         allowNull: true
     },
     DATA_MODIFICACAO: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
+        defaultValue: new Date(),
         allowNull: true
     }
 })
@@ -52,12 +54,19 @@ const bulkCreate = (queryStream, connection, tipoRelatorio) => {
 
 }
 
-const deketeOlderThan = (date) => {
-
+const deleteOlderThan = (date) => {
+    return TabelaCampeao.destroy({
+        where: {
+            DATA_MODIFICACAO: {
+                [Op.lt]: date
+            }
+        }
+    })
 }
 
 module.exports = {
     sequelize,
     //bulkCreate,
-    //deleteOlderThan
+    deleteOlderThan
 }
+

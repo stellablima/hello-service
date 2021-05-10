@@ -32,18 +32,36 @@ npm install pg --save
 
 postgress instalar local(sdds mongo atlas)
 
-create database servico_db;
-\c servico_db;
-\dt;
-\dt *tabela*;
-///////////////////////////////
-delete --tabelaChampeaos;
-\d tabelaChampeao
-tabelaCampeaos
-tabelaChampeaos
 
+create database sever_db;
+\l
+\c sever_db;
+INSERT INTO public."TabelaCampeaos"("NOME", "LINE")	VALUES ( 'Lux', 'Vamos iluminar isso aqui!');
+\dt;
+\d public."TabelaCampeaos";
+select * from public."TabelaCampeaos";
+
+
+--job start--
+src/services/carga
 
 
 
 dockerfile
 .dockerignore
+git push --set-upstream origin master
+///////////////////////////////
+
+
+https://www.youtube.com/watch?v=Ft3F7wWA-x8&list=PLucm8g_ezqNoAkYKXN_zWupyH6hQCAwxY&index=6
+cria db: create database sever_db
+Listar bancos disponíveis: \l
+Mudar para banco: \c sever_db;
+create user bob with password 'mypass';
+drop database sever_db;
+create schema public;
+create table public."TabelaCampeao"( nome CHAR(15), line CHAR(20));
+\d public."TabelaCampeaos";
+\dt;
+\dt public."TabelaCampeaos";
+delete --tabelaChampeaos;
